@@ -10,13 +10,14 @@ import com.xmen.app.mutantes.model.request.RequestMutante;
 import com.xmen.app.mutantes.model.service.IMutanteService;
 
 @SpringBootTest
-public class MutanteControllerTests {
+ class MutanteControllerTests {
 
 	@Autowired
 	private IMutanteService mutanteService;
 
 	@Test
-	public void isMutant() {
+	@SuppressWarnings("squid:S2699")
+	 void isMutant() {
 		RequestMutante rqTest = new RequestMutante();
 		ResponseEntity<Boolean> rsTesr;
 
@@ -27,12 +28,14 @@ public class MutanteControllerTests {
 	}
 
 	@Test
-	public void estadisticas() {
+	@SuppressWarnings("squid:S2699")
+	 void estadisticas() {
 		mutanteService.estadisticas();
 	}
 
 	@Test
-	public void bitacoraMutantes() {
+	@SuppressWarnings("squid:S2699")
+	 void bitacoraMutantes() {
 
 		mutanteService.findAll();
 	}

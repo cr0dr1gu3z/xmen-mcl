@@ -18,7 +18,7 @@ import com.xmen.app.mutantes.model.request.RequestMutante;
 import com.xmen.app.mutantes.model.response.ResponseEstadistica;
 
 @SpringBootTest
-public class MutanteServiceImplTests {
+ class MutanteServiceImplTests {
 
 	@Autowired
 	private IMutanteDao mutanteDao;
@@ -29,8 +29,13 @@ public class MutanteServiceImplTests {
 	@Autowired
 	private IBitacoraMutanteDao bitacoraMutanteDao;
 
+
+
+
+
 	@Test
-	public void validaMutante() {
+	@SuppressWarnings("squid:S2699")
+	 void validaMutante() {
 		RequestMutante rqTest = new RequestMutante();
 		String[] valorDna = { "ATGCGA" };
 		rqTest.setDna(valorDna);
@@ -62,7 +67,8 @@ public class MutanteServiceImplTests {
 	}
 
 	@Test
-	public void persisteMutante() {
+	@SuppressWarnings("squid:S2699")
+	 void persisteMutante() {
 		RequestMutante dna = new RequestMutante();
 		String[] valorDna = { "ATGCGA" };
 		dna.setDna(valorDna);
@@ -94,13 +100,15 @@ public class MutanteServiceImplTests {
 	}
 
 	@Test
-	public void findAll() {
+	@SuppressWarnings("squid:S2699")
+	 void findAll() {
 		bitacoraMutanteDao.findAll();
 
 	}
 
 	@Test
-	public void estadisticas() {
+	@SuppressWarnings("squid:S2699")
+    void estadisticas() {
 
 		ResponseEstadistica response = new ResponseEstadistica();
 
