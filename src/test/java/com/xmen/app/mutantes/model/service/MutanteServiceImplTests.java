@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.xmen.app.mutantes.model.dao.IBitacoraMutanteDao;
 import com.xmen.app.mutantes.model.dao.IMutanteDao;
@@ -27,50 +29,124 @@ import com.xmen.app.mutantes.model.response.ResponseEstadistica;
 	private INoMutante noMutanteDao;
 
 	@Autowired
-	private IBitacoraMutanteDao bitacoraMutanteDao;
-
-
-
-
+	private IBitacoraMutanteDao bitacoraMutanteDao;	
+	
 
 	@Test
 	@SuppressWarnings("squid:S2699")
 	 void validaMutante() {
+		
 		RequestMutante rqTest = new RequestMutante();
-		String[] valorDna = { "ATGCGA" };
+		String[] valorDna = { "ATGCGA","ATGCGC","ATGCGA" };
+		String[] valorDna_2 = { "ATGCGA","ATGCGA" };
 		rqTest.setDna(valorDna);
+		
+		
+		
+		 Integer contadormutante=2;
 
-		Integer contadorNomutante = 0;
-		Integer contadormutante = 0;
-
-		if (rqTest.getDna() != null) {
-			for (String adnStr : rqTest.getDna()) {
-
-				Mutante mutante = new Mutante();
-				NoMutante noMutante = new NoMutante();
-
-				mutante = mutanteDao.findByAdn(adnStr);
-
-				if (Objects.isNull(mutante)) {
-					noMutante = noMutanteDao.findByAdn(adnStr);
-
-					if (!Objects.isNull(noMutante)) {
-						contadorNomutante = contadorNomutante + 1;
+		
+				   
+				if (contadormutante >= 2) {
+					
+					ResponseEntity.status(HttpStatus.OK).body(true);
+				} 
+			
+		
+		
+		
+		rqTest.setDna(valorDna_2);
+		contadormutante = 1;
+	
+			if (rqTest.getDna() != null) 
+			{
+				   
+				if (contadormutante >= 2) {					
+					
+				} else {
+					
+					 ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
+				}
+			}
+			
+			valorDna_2 = null;
+			rqTest.setDna(valorDna_2);
+			contadormutante = 1;
+			
+			if (rqTest.getDna() != null) 
+			{
+			} else {
+				ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
+			}
+			
+			
+			rqTest.setDna(null);
+			if (Objects.isNull(rqTest)) {
+				ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
+			} else {
+				if (rqTest.getDna() != null) 
+				{
+					   
+					if (contadormutante >= 2) {
+						
+						ResponseEntity.status(HttpStatus.OK).body(true);
+					} else {
+						
+						 ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
 					}
 				} else {
-					contadormutante = contadormutante + 1;
+					ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
 				}
+			}
 
+	}
+	
+	@Test
+	@SuppressWarnings("squid:S2699")
+     void recorreLista() {
+		
+	
+		RequestMutante rqTest = new RequestMutante();
+		String[] valorDna = { "ATGCGA","ATGCGC","ATCCGA" };
+		String[] valorDna_2 = { "ATGCGA" };
+		rqTest.setDna(valorDna);
+		
+		
+		Integer contadorNomutante = 0;
+		Integer contadormutante=0;
+		
+		for (String adnStr : rqTest.getDna()) {
+			Mutante mutante = mutanteDao.findByAdn(adnStr);
+			if (Objects.isNull(mutante)) {
+				NoMutante noMutante = noMutanteDao.findByAdn(adnStr);
+				if (!Objects.isNull(noMutante))
+					contadorNomutante = contadorNomutante + 1;				
+			} else {
+				contadormutante = contadormutante + 1;
 			}
 		}
+		
+		rqTest.setDna(valorDna_2);
 
+		 contadorNomutante = 0;
+		 contadormutante=0;
+		for (String adnStr : rqTest.getDna()) {
+			Mutante mutante = mutanteDao.findByAdn(adnStr);
+			if (Objects.isNull(mutante)) {
+				NoMutante noMutante = noMutanteDao.findByAdn(adnStr);
+				if (!Objects.isNull(noMutante))
+					contadorNomutante = contadorNomutante + 1;				
+			} else {
+				contadormutante = contadormutante + 1;
+			}
+		}
 	}
 
 	@Test
 	@SuppressWarnings("squid:S2699")
 	 void persisteMutante() {
 		RequestMutante dna = new RequestMutante();
-		String[] valorDna = { "ATGCGA" };
+		String[] valorDna = { "ATGCGA","ATGCGC" };
 		dna.setDna(valorDna);
 		Boolean esMutante = true;
 
@@ -78,7 +154,7 @@ import com.xmen.app.mutantes.model.response.ResponseEstadistica;
 		StringBuffer sb = new StringBuffer();
 		Date date = new Date(System.currentTimeMillis());
 
-		try {
+		
 
 			for (String adn : dna.getDna()) {
 				sb.append(adn);
@@ -93,9 +169,7 @@ import com.xmen.app.mutantes.model.response.ResponseEstadistica;
 				bitacoraMutanteDao.save(bitacora);
 			}
 
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
+		
 
 	}
 
@@ -103,6 +177,7 @@ import com.xmen.app.mutantes.model.response.ResponseEstadistica;
 	@SuppressWarnings("squid:S2699")
 	 void findAll() {
 		bitacoraMutanteDao.findAll();
+		
 
 	}
 
@@ -122,5 +197,7 @@ import com.xmen.app.mutantes.model.response.ResponseEstadistica;
 			}
 		}
 	}
+		
+		
 
 }

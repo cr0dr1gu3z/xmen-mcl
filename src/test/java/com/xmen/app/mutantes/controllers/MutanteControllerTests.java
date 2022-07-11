@@ -20,10 +20,16 @@ import com.xmen.app.mutantes.model.service.IMutanteService;
 	 void isMutant() {
 		RequestMutante rqTest = new RequestMutante();
 		ResponseEntity<Boolean> rsTesr;
+		ResponseEntity<Boolean> rsTesr_2;
+		
 
 		String[] valorDna = { "ATGCGA" };
+		String[] valorDna_2 = { "ATGCGA","ATGCGC","ATCCGC" };
 		rqTest.setDna(valorDna);
+		
 
+		rsTesr = mutanteService.validaMutante(rqTest);
+		rqTest.setDna(valorDna_2);
 		rsTesr = mutanteService.validaMutante(rqTest);
 	}
 
@@ -31,12 +37,14 @@ import com.xmen.app.mutantes.model.service.IMutanteService;
 	@SuppressWarnings("squid:S2699")
 	 void estadisticas() {
 		mutanteService.estadisticas();
+		mutanteService.estadisticas();
 	}
 
 	@Test
 	@SuppressWarnings("squid:S2699")
 	 void bitacoraMutantes() {
 
+		mutanteService.findAll();
 		mutanteService.findAll();
 	}
 

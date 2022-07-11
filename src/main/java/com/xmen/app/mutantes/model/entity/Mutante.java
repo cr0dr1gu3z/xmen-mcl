@@ -32,25 +32,32 @@ public class Mutante implements Serializable
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getAdn() {
 		return adn;
 	}
+
 	public void setAdn(String adn) {
 		this.adn = adn;
 	}
+
 	public Date getCreateAt() {
 		return createAt;
 	}
+
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
+	
 	
 	
 	
