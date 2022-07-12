@@ -16,9 +16,9 @@ Dentro del MS se encuentran 3 PATH los cuales ayudan a la validación, estadíst
 
 ## Consumo de Servicio
 
-Para el consumo del servicio ser podria colocar el la siguiente url por medio de Postman o SOAPUI:
+Para el consumo del servicio ser podria colocar el la siguiente url por medio de Postman o SOAPUI:https://xmen-servicio-mutantes.rj.r.appspot.com/[PATH]
 
-De igual forma se podria ingrsar a la siguiente url para ejecutar el Swagger del servicio.
+De igual forma se podria ingrsar a la siguiente url para ejecutar el Swagger del servicio: https://xmen-servicio-mutantes.rj.r.appspot.com/swagger-ui.html
 
 El servicio solo cuenta con un Path Post el cual es /mutant con el cual se muestra un body del rq
 
