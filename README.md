@@ -31,3 +31,5 @@ El servicio solo cuenta con un Path Post el cual es /mutant con el cual se muest
 
 ```
 
+Nota: si se corre el proyecto de forma local se podria validar la funcionalidad con el host http://localhost:8001/
+
